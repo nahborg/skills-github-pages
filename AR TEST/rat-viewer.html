@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;3D RAT Model Viewer&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #f0f0f0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>model-viewer {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100vw;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.progress-bar {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #ccc;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.update-bar {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 0%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #3f51b5;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: width 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.progress-bar.hide {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#ar-button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #3f51b5;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#ar-prompt {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>right: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#error {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #ffffffdd;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transform: translate3d(-50%, -50%, 0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#error.hide {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>visibility: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: visibility 2s, opacity 1s 1s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;model-viewer id="model-viewer"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>src="RAT_V.1.glb"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ar</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ar-modes="webxr scene-viewer quick-look"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>camera-controls</p>
+<p class="p1"><span class="Apple-converted-space">  </span>tone-mapping="neutral"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>poster="poster.webp"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>shadow-intensity="1"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>autoplay</p>
+<p class="p1"><span class="Apple-converted-space">  </span>auto-rotate</p>
+<p class="p1"><span class="Apple-converted-space">  </span>alt="3D model of a rat"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Loading progress bar --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="progress-bar hide" slot="progress-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="update-bar"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- AR Button --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button slot="ar-button" id="ar-button"&gt;View in your space&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- AR Prompt --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="ar-prompt"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://modelviewer.dev/shared-assets/icons/hand.png" alt="AR hand prompt"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- AR error fallback --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="error" class="hide"&gt;AR is not supported on this device&lt;/div&gt;</p>
+<p class="p1">&lt;/model-viewer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const modelViewer = document.querySelector("#model-viewer");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>modelViewer.addEventListener('progress', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const progress = event.detail.totalProgress * 100;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const bar = modelViewer.querySelector('.update-bar');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>bar.style.width = `${progress}%`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>modelViewer.addEventListener('ar-status', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (event.detail.status === 'failed') {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const error = document.querySelector("#error");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>error.classList.remove('hide');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>error.addEventListener('transitionend', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>error.classList.add('hide');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
